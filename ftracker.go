@@ -44,14 +44,14 @@ func meanSpeed(action int, duration float64) float64 {
 // action int — количество совершенных действий(число шагов при ходьбе и беге, либо гребков при плавании).
 // trainingType string — вид тренировки(Бег, Ходьба, Плавание).
 // duration float64 — длительность тренировки в часах.
-func ShowTrainingInfo(action int, trainingType string, duration, weight, height float64, lengthPool, countPool int) string {
+func ShowTrainingInfo(action int, trainingType string, weight, height, duration float64, lengthPool, countPool int) string {
 	// ваш код здесь
 
 	switch trainingType {
 	case "Бег":
-		distance := distance(action)                               // вызовите здесь необходимую функцию
-		speed := meanSpeed(action, duration)                       // вызовите здесь необходимую функцию
-		calories := RunningSpentCalories(action, weight, duration) // вызовите здесь необходимую функцию
+		distance := distance(action)                                       // вызовите здесь необходимую функцию
+		speed := meanSpeed(action, duration)                               // вызовите здесь необходимую функцию
+		calories := RunningSpentCalories(action, weight, duration, height) // вызовите здесь необходимую функцию
 		return fmt.Sprintf("Тип тренировки: %s\nДлительность: %.2f ч.\nДистанция: %.2f км.\nСкорость: %.2f км/ч\nСожгли калорий: %.2f\n", trainingType, duration, distance, speed, calories)
 	case "Ходьба":
 		distance := distance(action)                                       // вызовите здесь необходимую функцию
@@ -82,7 +82,7 @@ const (
 // action int — количество совершенных действий(число шагов при ходьбе и беге, либо гребков при плавании).
 // weight float64 — вес пользователя.
 // duration float64 — длительность тренировки в часах.
-func RunningSpentCalories(action int, duration, weight, height float64) float64 {
+func RunningSpentCalories(action int, height, weight, duration float64) float64 {
 	// ваш код здесь
 	sport := walkingCaloriesWeightMultiplier * weight // 0.035 * ВесСпортсменаКг
 	speed := meanSpeed(action, duration) * kmhInMsec  // Сред. скорость в секунду
